@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@515&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script defer src="main.js"></script>
+    <title>Todo List</title>
+</head>
+<body>
+    <div class="content">
+        <div class="left-bar">
+            <h1 id="app-name">Todo</h1>
+            <ul type=none class="projects">
+                <li class="nav-item">
+                    <ion-icon name="albums-outline" class="nav-icon"></ion-icon>
+                    <span class="nav-title">General</span>
+                    <span class="nav-count">1</span>
+                </li>
+                <li class="nav-item">
+                    <ion-icon name="calendar-outline" class="nav-icon"></ion-icon>
+                    <span class="nav-title">Today</span>
+                    <span class="nav-count">1</span>
+                </li>
+                <li class="nav-item">
+                    <ion-icon name="star-outline" class="nav-icon"></ion-icon>
+                    <span class="nav-title">Important</span>
+                    <span class="nav-count"></span>
+                </li>
+            </ul>
+            <div class="add-project">
+                <ion-icon name="duplicate-outline" class="nav-icon" id="add-project-button"></ion-icon>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="search-container">
+                <ion-icon name="search-outline" id="search-icon"></ion-icon>
+                <input type="text" id="search-bar">
+            </div>
+            <div class="list-content"></div>
+        </div>
+
+    </div>
+</body>
+</html>
