@@ -45,20 +45,74 @@
             </div>
             <div class="list-items-container">
                 <ul type="none" class="list-items">
-                    <li class="item">
+                    <li class="item priority-medium">
                         <ion-icon name="checkmark-circle-outline" class="check-box"></ion-icon>
                         <div class="item-details">
                             <span>Take out the trash</span>
                             <span>1/02/20</span>
                         </div>
                         <div class="item-actions">
-                            <ion-icon name="star-outline" class="prioritize-item"></ion-icon>
+                            <ion-icon name="star" class="prioritize-item"></ion-icon>
+                            <ion-icon name="trash-outline" class="delete-item"></ion-icon>
+                        </div>
+                    </li>
+                    <li class="item priority-low">
+                        <ion-icon name="checkmark-circle-outline" class="check-box"></ion-icon>
+                        <div class="item-details">
+                            <span>Take out the trash</span>
+                            <span>1/02/20</span>
+                        </div>
+                        <div class="item-actions">
+                            <ion-icon name="star" class="prioritize-item"></ion-icon>
+                            <ion-icon name="trash-outline" class="delete-item"></ion-icon>
+                        </div>
+                    </li>
+                    <li class="item priority-high">
+                        <ion-icon name="checkmark-circle-outline" class="check-box"></ion-icon>
+                        <div class="item-details">
+                            <span>Take out the trash</span>
+                            <span>1/02/20</span>
+                        </div>
+                        <div class="item-actions">
+                            <ion-icon name="star" class="prioritize-item"></ion-icon>
                             <ion-icon name="trash-outline" class="delete-item"></ion-icon>
                         </div>
                     </li>
                 </ul>
             </div>
-
+        </div>
+        <div class="list-item-form-container">
+            <div class="list-item-form">
+                <h2 class="form-head">New Todo</h2>
+                <form class="new-todo-form">
+                    <div class="input-wrapper">
+                        <input type="text" name="todo-title" id="todo-title">
+                        <label for="todo-title" class="form-label">Title</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="date" name="todo-date" id="todo-date">
+                        <label for="todo-date" class="form-label">Date</label>
+                    </div>
+                    <div class="input-wrapper notes">
+                        <textarea id="todo-notes"></textarea>
+                        <label for="todo-notes" class="form-label">Notes</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <div class="priority-radio-wrapper">
+                            <input type="radio" name="todo-priority" id="todo-low">
+                            <label for="todo-low" class="radio-label low">Low</label>
+                            <input type="radio" name="todo-priority" id="todo-medium">
+                            <label for="todo-medium" class="radio-label medium">Medium</label>
+                            <input type="radio" name="todo-priority" id="todo-high">
+                            <label for="todo-high" class="radio-label high">High</label>
+                        </div>
+                        <span id="priority-label">Priority</span>
+                    </div>
+                    <div class="submit-todo">
+                        <input type="button" value="Add" id="add-button">
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </body>
