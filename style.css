@@ -10,7 +10,10 @@ html, body {
     --normal-font: 'Roboto', sans-serif;
     --label-weight: 100;
     --icon-size: 2rem;
-    --blue-theme: #5590ff;
+    --blue-theme: linear-gradient(45deg, #007eff, #00adff);
+    --low-green: rgb(197, 255, 197);
+    --medium-yellow: rgb(254, 255, 165);
+    --high-red: rgb(241, 168, 217); 
 }
 
 .content {
@@ -35,7 +38,6 @@ html, body {
     color: white;
     background: var(--blue-theme);
     transition: width 500ms;
-    z-index: 1;
 }
 
 .nav-item {
@@ -86,7 +88,9 @@ html, body {
     transition: transform 200ms;
 }
 #add-project-button:hover,
-#add-item-button:hover {
+#add-item-button:hover,
+.prioritize-item:hover,
+.delete-item:hover {
     transform: scale(1.3);
 }
 
@@ -156,6 +160,18 @@ html, body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.item.priority-low {
+    border-left: 5px solid rgb(197, 255, 197);
+}
+
+.item.priority-medium {
+    border-left: 5px solid rgb(254, 255, 165);
+}
+
+.item.priority-high {
+    border-left: 5px solid rgb(241, 168, 217);
+}
+
 .item-details {
     display: flex;
     flex-direction: column;
@@ -185,7 +201,129 @@ html, body {
 .prioritize-item,
 .delete-item {
     padding: 0 10px;
-    font-size: var(--icon-size);
+    font-size: 1.5rem;
+    transition: transform 200ms;
+}
+
+.prioritize-item {
+    color: rgb(228, 228, 158);
+}
+
+.delete-item {
+    color: rgb(255, 35, 182);;
+}
+
+.list-item-form-container {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.3);
+    min-height: 100%;
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-item-form {
+    position: relative;
+    min-height: 450px;
+    min-width: 400px;
+    background: white;
+    border-radius: 1%;
+    transition: min-height 200ms, min-width 200ms;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 10px 20px;
+}
+
+
+.form-head {
+    font-family: var(--label-font);
+    margin: 0;
+    padding: 10px 20px 10px 20px;
+    color: white;
+    background: linear-gradient(45deg, #00adff, #007eff);
+}
+
+.new-todo-form {
+    flex-grow: 1;
+}
+
+input[type='date'],
+.input-wrapper textarea {
+    font-family: var(--normal-font);
+}
+
+.form-label,
+#priority-label {
+    margin-bottom: 5px;
+    font-size: 0.8rem;
+    transition: font-size 200ms;
+}
+
+.input-wrapper input:focus + .form-label,
+.input-wrapper textarea:focus + .form-label {
+    font-size: 1rem;
+}
+
+.priority-radio-wrapper {
+    align-self: center;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+input[type="radio"] {
+    position: absolute;
+    -webkit-appearance: none;
+}
+
+input[type="radio"]:checked + label {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+.radio-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: 400 13.3333px Arial;
+    height: 20px;
+    width: 70px;
+    opacity: 0.5;
+    transition: transform 200ms, opacity 200ms;
+}
+
+.radio-label.low {
+    background: var(--low-green);
+    border: 0.5px solid rgb(0, 189, 0);
+}
+
+.radio-label.medium {
+    background: var(--medium-yellow);
+    border: 0.5px solid rgb(218, 203, 0);
+}
+
+.radio-label.high {
+    background: var(--high-red);
+    border: 0.5px solid rgb(202, 0, 101);
+}
+
+.submit-todo {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-grow: 1;
+}
+
+#add-button {
+    border: none;
+    color: white;
+    background: var(--blue-theme);
 }
 
 @media only screen and (max-width: 700px) {   
@@ -195,6 +333,16 @@ html, body {
 
     .nav-title, .nav-count {
         visibility: hidden;
+    }
+
+    .list-item-form {
+        min-height: 350px;
+        min-width: 300px;
+    }
+
+    .radio-label {
+        width: 55px;
+        transition: transform 200ms;
     }
 }
 
