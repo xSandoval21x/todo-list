@@ -11,6 +11,7 @@ html, body {
     --label-weight: 100;
     --icon-size: 2rem;
     --blue-theme: linear-gradient(45deg, #007eff, #00adff);
+    --blue-theme-reverse: linear-gradient(45deg, #00adff, #007eff);
     --low-green: rgb(197, 255, 197);
     --medium-yellow: rgb(254, 255, 165);
     --high-red: rgb(241, 168, 217); 
@@ -214,13 +215,17 @@ html, body {
 }
 
 .list-item-form-container {
+    display: none;
     position: fixed;
     background: rgba(0, 0, 0, 0.3);
     min-height: 100%;
     min-width: 100%;
-    display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.show {
+    display: flex;
 }
 
 .list-item-form {
@@ -246,11 +251,13 @@ html, body {
     margin: 0;
     padding: 10px 20px 10px 20px;
     color: white;
-    background: linear-gradient(45deg, #00adff, #007eff);
+    background: var(--blue-theme-reverse);
 }
 
 .new-todo-form {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 input[type='date'],
@@ -262,6 +269,7 @@ input[type='date'],
 #priority-label {
     margin-bottom: 5px;
     font-size: 0.8rem;
+    font-family: var(--label-font);
     transition: font-size 200ms;
 }
 
@@ -270,8 +278,20 @@ input[type='date'],
     font-size: 1rem;
 }
 
+#todo-notes {
+    height: 80px;
+    resize: none;
+    font-size: 0.7rem;
+    transition: height 200ms;
+}
+
+#todo-notes:focus {
+    height: 100px;
+}
+
 .priority-radio-wrapper {
     align-self: center;
+    padding-top: 20px;
     width: 80%;
     display: flex;
     justify-content: space-between;
@@ -283,7 +303,6 @@ input[type="radio"] {
 }
 
 input[type="radio"]:checked + label {
-    transform: scale(1.2);
     opacity: 1;
 }
 
@@ -291,11 +310,12 @@ input[type="radio"]:checked + label {
     display: flex;
     justify-content: center;
     align-items: center;
-    font: 400 13.3333px Arial;
     height: 20px;
     width: 70px;
-    opacity: 0.5;
-    transition: transform 200ms, opacity 200ms;
+    opacity: 0.4;
+    font-family: var(--label-font);
+    font-size: 0.7rem;
+    transition: opacity 500ms;
 }
 
 .radio-label.low {
@@ -321,9 +341,13 @@ input[type="radio"]:checked + label {
 }
 
 #add-button {
+    height: 40px;
+    width: 100%;
     border: none;
     color: white;
-    background: var(--blue-theme);
+    background: var(--blue-theme-reverse);
+    margin-top: auto;
+    font-family: var(--label-font);
 }
 
 @media only screen and (max-width: 700px) {   
@@ -340,9 +364,18 @@ input[type="radio"]:checked + label {
         min-width: 300px;
     }
 
+    #todo-notes {
+        height: 30px;
+    }
+    
     .radio-label {
         width: 55px;
         transition: transform 200ms;
+    }
+
+    .priority-radio-wrapper {
+        padding-top: 0;
+        width: 90%;
     }
 }
 
