@@ -13,25 +13,11 @@
     <div class="content">
         <div class="left-bar">
             <h1 id="app-name">Todo</h1>
-            <ul type="none" class="projects">
-                <li class="nav-item">
-                    <ion-icon name="albums-outline" class="nav-icon"></ion-icon>
-                    <span class="nav-title">General</span>
-                    <span class="nav-count">1</span>
-                </li>
-                <li class="nav-item">
-                    <ion-icon name="calendar-outline" class="nav-icon"></ion-icon>
-                    <span class="nav-title">Today</span>
-                    <span class="nav-count">1</span>
-                </li>
-                <li class="nav-item">
-                    <ion-icon name="star-outline" class="nav-icon"></ion-icon>
-                    <span class="nav-title">Important</span>
-                    <span class="nav-count"></span>
-                </li>
+            <ul type="none" class="projects" data-projects>
             </ul>
             <div class="add-project">
                 <ion-icon name="duplicate-outline" class="nav-icon" id="add-project-button"></ion-icon>
+                <input type="text" name="new-project-input" id="new-project-input" placeholder="New Project">
             </div>
         </div>
         <div class="main-content">
@@ -99,7 +85,7 @@
                     </div>
                     <div class="input-wrapper">
                         <div class="priority-radio-wrapper">
-                            <input type="radio" name="todo-priority" id="todo-low">
+                            <input type="radio" name="todo-priority" id="todo-low" checked>
                             <label for="todo-low" class="radio-label low">Low</label>
                             <input type="radio" name="todo-priority" id="todo-medium">
                             <label for="todo-medium" class="radio-label medium">Medium</label>
