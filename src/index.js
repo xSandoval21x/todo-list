@@ -1,33 +1,100 @@
+import createProject from './projectFactory';
+
 const projectsList = document.querySelector('[data-projects]');
-let projects = [
+const addProjectForm = document.querySelector('[data-new-project-form]');
+const addProjectInput = document.querySelector('[data-new-project-input]');
+const deleteListButton = document.querySelector('[data-delete-list-button]');
+const listHead = document.querySelector('[data-list-head]');
+const listTitle = document.querySelector('[data-list-title]');
+const listItems = document.querySelector('[data-list-items]');
+const itemTemplate = document.getElementById('item-template');
+
+const LOCAL_STORAGE_PROJECTS_KEY = 'todo.projects';
+const LOCAL_STORAGE_SELECTED_PROJECT_ID = 'todo.selectedProjectId';
+let projects = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECTS_KEY)) ||
+[
     {
         id: 1,
         name: "General",
+        todos: [],
+        todoCount: 0,
+        default: true,
     },
     {
         id: 2,
         name: "Today",
+        todos: [],
+        todoCount: 0,
+        default:true,
     },
     {
         id: 3,
         name: "Important",
+        todos: [],
+        todoCount: 0,
+        default: true,
     },
 ];
+let selectedProjectId = JSON.parse(localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT_ID)) || 1;
+
+projectsList.addEventListener('click', e => {
+    if(e.target.tagName.toLowerCase() === 'li') {
+        selectedProjectId = e.target.dataset.projectId;
+    } else if (e.target.parentElement.tagName.toLowerCase() === 'li') {
+        selectedProjectId = e.target.parentElement.dataset.projectId;
+    }
+    
+    save();
+    render();
+});
+addProjectForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const projectName = addProjectInput.value;
+    if(projectName == null || projectName === '') return;
+    const project = createProject(projectName);
+    addProjectInput.value = null;
+    projects.push(project);
+    save();
+    render();
+});
+deleteListButton.addEventListener('click', e => {
+    projects = projects.filter(project => project.id !== selectedProjectId);
+    selectedProjectId = 1;
+    render();
+    save();
+})
+
+function save() {
+    localStorage.setItem(LOCAL_STORAGE_PROJECTS_KEY, JSON.stringify(projects));
+    localStorage.setItem(LOCAL_STORAGE_SELECTED_PROJECT_ID, JSON.stringify(selectedProjectId));
+}
 
 function render() {
     clearElement(projectsList);
+    renderProjects();
+    renderProjectItems();
+}
+
+function renderProjects() {
     projects.forEach(project => {
         const projectElement = document.createElement('li');
         const projectIcon = document.createElement('ion-icon');
         const projectTitle = document.createElement('span');
         const projectTodoCount = document.createElement('span');
-
+    
         projectElement.classList.add('nav-item');
-        projectElement.dataset.listId = project.id;
+        projectElement.dataset.projectId = project.id;
         projectIcon.classList.add('nav-icon');
         projectTitle.classList.add('nav-title');
         projectTitle.innerText = project.name;
         projectTodoCount.classList.add('nav-count');
+    
+        if(project.id == selectedProjectId) {
+            setTimeout( () => {
+                projectElement.classList.add('active-project');
+            }, 1);
+        }
+        
         switch(project.id) {
             case 1:
                 projectIcon.name = 'albums-outline';
@@ -41,11 +108,35 @@ function render() {
             default:
                 projectIcon.name = 'clipboard-outline';
         };
-
+    
         projectElement.appendChild(projectIcon);
         projectElement.appendChild(projectTitle);
         projectElement.appendChild(projectTodoCount);
         projectsList.appendChild(projectElement);
+    });
+}
+
+function renderProjectItems() {
+    //if there is no selected project, default to General
+    if(selectedProjectId == null) {
+        selectedProjectId = 1;
+    }
+    const selectedProject = projects.find(project => project.id == selectedProjectId);
+    listTitle.innerText= selectedProject.name;
+
+    if(selectedProject.default) {
+        deleteListButton.style.display = 'none';
+    }else {
+        deleteListButton.style.display = '';
+    }
+
+    clearElement(listItems);
+    selectedProject.todos.forEach(todo => {
+        const itemElement = document.importNode(itemTemplate.content, true);
+        const itemName = itemElement.querySelector('[data-item-name]');
+        const itemDate = itemElement.querySelector('[data-item-date]');
+
+        //continue working on creating items and rendering.
     });
 }
 
@@ -54,5 +145,6 @@ function clearElement(element) {
         element.removeChild(element.firstChild);
     }
 }
+
 
 render();

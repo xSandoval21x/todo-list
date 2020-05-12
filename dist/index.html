@@ -16,8 +16,15 @@
             <ul type="none" class="projects" data-projects>
             </ul>
             <div class="add-project">
-                <ion-icon name="duplicate-outline" class="nav-icon" id="add-project-button"></ion-icon>
-                <input type="text" name="new-project-input" id="new-project-input" placeholder="New Project">
+                <form action="" data-new-project-form class="add-project-form">
+                    <ion-icon name="duplicate-outline" class="nav-icon"
+                    id="add-project-button"></ion-icon>
+                    <input
+                        type="text" name="new-project-input" 
+                        id="new-project-input"
+                        placeholder="New Project" data-new-project-input
+                    >
+                </form>
             </div>
         </div>
         <div class="main-content">
@@ -25,12 +32,15 @@
                 <ion-icon name="search-outline" id="search-icon"></ion-icon>
                 <input type="text" id="search-bar">
             </div>
-            <div class="list-head">
-                <h2 class="list-title">General</h2>
-                <ion-icon name="add-circle-outline" id="add-item-button"></ion-icon>
+            <div class="list-head" data-list-head>
+                <h2 class="list-title" data-list-title>General</h2>
+                <div class="list-actions" data-list-actions>
+                    <ion-icon name="add-circle-outline" id="add-item-button"></ion-icon>
+                    <ion-icon name="close-outline" id="delete-list-button" data-delete-list-button></ion-icon>
+                </div>
             </div>
-            <div class="list-items-container">
-                <ul type="none" class="list-items">
+            <div class="list-items-container" data-list-items-container>
+                <ul type="none" class="list-items" data-list-items>
                     <li class="item priority-medium">
                         <ion-icon name="checkmark-circle-outline" class="check-box"></ion-icon>
                         <div class="item-details">
@@ -101,5 +111,18 @@
             </div>
         </div>
     </div>
+    <template id="item-template">
+        <li class="item" data-item>
+            <ion-icon name="checkmark-circle-outline" class="check-box"></ion-icon>
+            <div class="item-details">
+                <span data-item-name></span>
+                <span data-item-date></span>
+            </div>
+            <div class="item-actions">
+                <ion-icon name="star" class="prioritize-item"></ion-icon>
+                <ion-icon name="trash-outline" class="delete-item"></ion-icon>
+            </div>
+        </li>
+    </template>
 </body>
 </html>
