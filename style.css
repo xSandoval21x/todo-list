@@ -9,7 +9,7 @@ html, body {
     --label-font: 'Comfortaa', cursive;
     --normal-font: 'Roboto', sans-serif;
     --label-weight: 100;
-    --icon-size: 2rem;
+    --icon-size: 1.5rem;
     --blue-theme: linear-gradient(45deg, #007eff, #00adff);
     --blue-theme-reverse: linear-gradient(45deg, #00adff, #007eff);
     --low-green: rgb(197, 255, 197);
@@ -44,8 +44,8 @@ html, body {
 .nav-item {
     display: flex;
     align-items: center;
-    height: 50px;
-    margin: 10px 0;
+    height: 40px;
+    margin: 5px 0;
     font-size: 1.1rem;
     font-family: var(--label-font);
     font-weight: var(--label-weight);
@@ -59,8 +59,8 @@ html, body {
 
 .nav-icon {
     padding-left: 35px;
-    min-height: 2rem;
-    min-width: 2rem;
+    min-height: var(--icon-size);
+    min-width: var(--icon-size);
     font-size: var(--icon-size);
 }
 
@@ -80,14 +80,38 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
     margin-top: auto;
     margin-bottom: 30px;
+}
+
+::placeholder {
+    opacity: 0.8;
+    color: white;
+    font-family: var(--label-font);
+    transition: opacity 200ms;
+}
+
+input:hover::placeholder {
+    opacity: 1;
 }
 
 #add-project-button {
     padding-left: 0;
     transition: transform 200ms;
+    margin: 5px;
 }
+
+#new-project-input {
+    padding: 0 2px;
+    width: 60%;
+    background: transparent;
+    border: none;
+    color: white;
+    border-bottom: 2px solid white;
+    font-family: var(--label-font);
+}
+
 #add-project-button:hover,
 #add-item-button:hover,
 .prioritize-item:hover,
@@ -302,7 +326,8 @@ input[type="radio"] {
     -webkit-appearance: none;
 }
 
-input[type="radio"]:checked + label {
+input[type="radio"]:checked + label,
+input[type="radio"]:hover + label {
     opacity: 1;
 }
 
@@ -348,6 +373,13 @@ input[type="radio"]:checked + label {
     background: var(--blue-theme-reverse);
     margin-top: auto;
     font-family: var(--label-font);
+    transition: height 200ms, font-size 200ms;
+}
+
+#add-button:hover,
+#add-button:focus {
+    height: 50px;
+    font-size: 1.2rem;
 }
 
 @media only screen and (max-width: 700px) {   
@@ -355,8 +387,22 @@ input[type="radio"]:checked + label {
         width: 100px;
     }
 
-    .nav-title, .nav-count {
+    .left-bar:hover {
+        width: 250px;
+    }
+
+    .left-bar:hover .nav-title,
+    .left-bar:hover .nav-count {
+        visibility: visible;
+    }
+
+    .nav-title,
+    .nav-count {
         visibility: hidden;
+    }
+
+    .add-project {
+        flex-direction: column;
     }
 
     .list-item-form {
@@ -397,6 +443,10 @@ input[type="radio"]:checked + label {
         margin: 0;
     }
 
+    .add-project {
+        flex-direction: row;
+    }
+
     #add-project-button {
         padding: 0;
     }
@@ -409,6 +459,10 @@ input[type="radio"]:checked + label {
         order: 1;
     }
     
+    .left-bar:hover {
+        width: 100%;
+    }
+
     .add-project {
         margin-top: 10px;
     }
