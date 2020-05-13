@@ -5,7 +5,6 @@ const projectsList = document.querySelector('[data-projects]');
 const addProjectForm = document.querySelector('[data-new-project-form]');
 const addProjectInput = document.querySelector('[data-new-project-input]');
 const deleteListButton = document.querySelector('[data-delete-list-button]');
-const listHead = document.querySelector('[data-list-head]');
 const listTitle = document.querySelector('[data-list-title]');
 const listItems = document.querySelector('[data-list-items]');
 const itemTemplate = document.getElementById('item-template');
@@ -177,8 +176,11 @@ function renderProjectItems() {
         const listElement = itemElement.querySelector('[data-item]');
         const itemName = itemElement.querySelector('[data-item-name]');
         const itemDate = itemElement.querySelector('[data-item-date]');
+        const completeItemButton = itemElement.querySelector('[data-complete-item]');
+        const importantItemButton = itemElement.querySelector('[data-important-item]');
+        const deleteItemButton = itemElement.querySelector('[data-delete-item]');
 
-        //continue working on creating items and rendering.
+        listElement.dataset.itemId = todo.id;
         itemName.innerText = todo.name;
         itemDate.innerText = todo.date === ''? '' : format(parseISO(todo.date), 'PPP');
         switch(todo.priority) {
@@ -192,7 +194,33 @@ function renderProjectItems() {
                 listElement.classList.add('priority-high');
                 break;
         }
-        //append list item
+
+        if(todo.complete) {
+            completeItemButton.classList.add('completed');
+            listElement.classList.add('completed');
+        }
+
+        if(todo.important) {
+            /*const importantProject = projects.find(project => project.id == 3);
+            importantProject.todos.push(todo);*/
+            importantItemButton.name = 'star';
+        }
+        //item action event listeners
+        completeItemButton.addEventListener('click', () => {
+            todo.complete = !todo.complete;
+            save();
+            render();
+        });
+        importantItemButton.addEventListener('click', () => {
+            todo.important = !todo.important;
+            save();
+            render();
+        });
+        deleteItemButton.addEventListener('click', () => {
+            //add function
+        });
+        
+
         listItems.appendChild(listElement);
     });
 }

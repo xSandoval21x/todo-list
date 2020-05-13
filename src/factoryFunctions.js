@@ -19,6 +19,7 @@ const createTodo = (todoName, todoDate, todoNotes, todoPriority) => {
     let notes = todoNotes;
     let priority = todoPriority;
     let complete = false;
+    let important = false;
 
     return {
         id,
