@@ -1,4 +1,5 @@
-import createProject from './projectFactory';
+import {format, parseISO} from 'date-fns';
+import {createProject, createTodo} from './factoryFunctions';
 
 const projectsList = document.querySelector('[data-projects]');
 const addProjectForm = document.querySelector('[data-new-project-form]');
@@ -8,6 +9,10 @@ const listHead = document.querySelector('[data-list-head]');
 const listTitle = document.querySelector('[data-list-title]');
 const listItems = document.querySelector('[data-list-items]');
 const itemTemplate = document.getElementById('item-template');
+const formContainer = document.querySelector('[data-item-form-container]');
+const addTodoButton = document.querySelector('[data-add-todo-button]');
+const submitTodoButton = document.querySelector('[data-submit-todo-form]');
+const closeFormButton = document.querySelector('[data-close-form]');
 
 const LOCAL_STORAGE_PROJECTS_KEY = 'todo.projects';
 const LOCAL_STORAGE_SELECTED_PROJECT_ID = 'todo.selectedProjectId';
@@ -37,6 +42,7 @@ let projects = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECTS_KEY)) ||
 ];
 let selectedProjectId = JSON.parse(localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT_ID)) || 1;
 
+
 projectsList.addEventListener('click', e => {
     if(e.target.tagName.toLowerCase() === 'li') {
         selectedProjectId = e.target.dataset.projectId;
@@ -63,6 +69,41 @@ deleteListButton.addEventListener('click', e => {
     render();
     save();
 })
+addTodoButton.addEventListener('click', () => {
+    formContainer.classList.add('show');
+});
+submitTodoButton.addEventListener('click', () => {
+    let todoTitleInput = document.getElementById('todo-title');
+    let todoDateInput = document.getElementById('todo-date');
+    let todoNotesInput = document.getElementById('todo-notes');
+    let todoPriority;
+    const priorityRadioButtons = document.querySelectorAll('input[type=radio]');
+    priorityRadioButtons.forEach(button => {
+        if(button.checked) {
+            //set label text as priority value
+            todoPriority = button.nextElementSibling.innerText;
+        }
+    });
+    const selectedProject = projects.find(project => project.id == selectedProjectId);
+    const todoObject = createTodo(todoTitleInput.value,
+        todoDateInput.value,
+        todoNotesInput.value,
+        todoPriority);
+    selectedProject.todos.push(todoObject);
+    todoTitleInput.value = null;
+    todoDateInput.value = null;
+    todoNotesInput.value = null;
+    priorityRadioButtons[0].checked = true;
+    hideForm();
+    //save and then render
+    save();
+    render();
+});
+closeFormButton.addEventListener('click', hideForm);
+
+function hideForm() {
+    formContainer.classList.remove('show');
+}
 
 function save() {
     localStorage.setItem(LOCAL_STORAGE_PROJECTS_KEY, JSON.stringify(projects));
@@ -133,10 +174,26 @@ function renderProjectItems() {
     clearElement(listItems);
     selectedProject.todos.forEach(todo => {
         const itemElement = document.importNode(itemTemplate.content, true);
+        const listElement = itemElement.querySelector('[data-item]');
         const itemName = itemElement.querySelector('[data-item-name]');
         const itemDate = itemElement.querySelector('[data-item-date]');
 
         //continue working on creating items and rendering.
+        itemName.innerText = todo.name;
+        itemDate.innerText = todo.date === ''? '' : format(parseISO(todo.date), 'PPP');
+        switch(todo.priority) {
+            case 'Low':
+                listElement.classList.add('priority-low');
+                break;
+            case 'Medium':
+                listElement.classList.add('priority-medium');
+                break;
+            case 'High':
+                listElement.classList.add('priority-high');
+                break;
+        }
+        //append list item
+        listItems.appendChild(listElement);
     });
 }
 
