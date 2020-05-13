@@ -205,6 +205,10 @@ input:hover::placeholder {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.item.completed {
+    text-decoration: line-through;
+}
+
 .item.priority-low {
     border-left: 5px solid rgb(197, 255, 197);
 }
@@ -235,6 +239,10 @@ input:hover::placeholder {
 .check-box:hover {
     opacity: 1;
     transition: opacity 200ms ease-in;
+}
+
+.check-box.completed {
+    opacity: 1;
 }
 
 .item-actions {

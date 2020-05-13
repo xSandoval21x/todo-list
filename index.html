@@ -116,14 +116,14 @@
     </div>
     <template id="item-template">
         <li class="item" data-item>
-            <ion-icon name="checkmark-circle-outline" class="check-box"></ion-icon>
+            <ion-icon name="checkmark-circle-outline" class="check-box" data-complete-item></ion-icon>
             <div class="item-details">
                 <span data-item-name></span>
                 <span class="item-date" data-item-date></span>
             </div>
             <div class="item-actions">
-                <ion-icon name="star" class="prioritize-item"></ion-icon>
-                <ion-icon name="trash-outline" class="delete-item"></ion-icon>
+                <ion-icon name="star-outline" class="prioritize-item" data-important-item></ion-icon>
+                <ion-icon name="trash-outline" class="delete-item" data-delete-item></ion-icon>
             </div>
         </li>
     </template>
