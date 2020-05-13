@@ -35,7 +35,7 @@
             <div class="list-head" data-list-head>
                 <h2 class="list-title" data-list-title>General</h2>
                 <div class="list-actions" data-list-actions>
-                    <ion-icon name="add-circle-outline" id="add-item-button"></ion-icon>
+                    <ion-icon name="add-circle-outline" id="add-item-button" data-add-todo-button></ion-icon>
                     <ion-icon name="close-outline" id="delete-list-button" data-delete-list-button></ion-icon>
                 </div>
             </div>
@@ -77,9 +77,12 @@
                 </ul>
             </div>
         </div>
-        <div class="list-item-form-container">
+        <div class="list-item-form-container" data-item-form-container>
             <div class="list-item-form">
-                <h2 class="form-head">New Todo</h2>
+                <div class="form-head">
+                    <h2 id="form-name">New Todo</h2>
+                    <ion-icon name="close-outline" id="close-form-button" data-close-form></ion-icon>
+                </div>
                 <form class="new-todo-form">
                     <div class="input-wrapper">
                         <input type="text" name="todo-title" id="todo-title">
@@ -105,7 +108,7 @@
                         <span id="priority-label">Priority</span>
                     </div>
                     <div class="submit-todo">
-                        <input type="button" value="Add" id="add-button">
+                        <input type="button" value="Add" id="add-button" data-submit-todo-form>
                     </div>
                 </form>
             </div>
@@ -116,7 +119,7 @@
             <ion-icon name="checkmark-circle-outline" class="check-box"></ion-icon>
             <div class="item-details">
                 <span data-item-name></span>
-                <span data-item-date></span>
+                <span class="item-date" data-item-date></span>
             </div>
             <div class="item-actions">
                 <ion-icon name="star" class="prioritize-item"></ion-icon>

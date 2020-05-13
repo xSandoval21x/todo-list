@@ -291,11 +291,22 @@ input:hover::placeholder {
 
 
 .form-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-family: var(--label-font);
     margin: 0;
     padding: 10px 20px 10px 20px;
     color: white;
     background: var(--blue-theme-reverse);
+}
+
+#form-name {
+    margin: 5px 0;
+}
+
+#close-form-button:hover {
+    color: rgb(161, 161, 161);
 }
 
 .new-todo-form {
@@ -320,6 +331,10 @@ input[type='date'],
 .input-wrapper input:focus + .form-label,
 .input-wrapper textarea:focus + .form-label {
     font-size: 1rem;
+}
+
+.item-date {
+    font-size: 0.8rem;
 }
 
 #todo-notes {
