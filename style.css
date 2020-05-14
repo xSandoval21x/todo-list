@@ -52,13 +52,12 @@ html, body {
     font-family: var(--label-font);
     font-weight: var(--label-weight);
     cursor: pointer;
-    filter: brightness(170%);
-    color: #00fff3;
-    transition: background 200ms, filter 500ms; 
+    color: white;
+    transition: background 200ms, color 500ms; 
 }
 
 .active-project {
-    filter: brightness(100%);
+    color: #00fff3;
 }
 
 .nav-item:hover {
