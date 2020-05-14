@@ -198,11 +198,10 @@ function renderProjectItems() {
         if(todo.complete) {
             completeItemButton.classList.add('completed');
             listElement.classList.add('completed');
+            completeItemButton.name = 'checkmark-circle-outline';
         }
 
         if(todo.important) {
-            /*const importantProject = projects.find(project => project.id == 3);
-            importantProject.todos.push(todo);*/
             importantItemButton.name = 'star';
         }
         //item action event listeners
@@ -212,12 +211,25 @@ function renderProjectItems() {
             render();
         });
         importantItemButton.addEventListener('click', () => {
+            const importantProject = projects.find(project => project.id == 3);
             todo.important = !todo.important;
+            if(todo.important) {
+                importantProject.todos.push(todo);
+            } else {
+                importantProject.todos = importantProject.todos.filter(item => item.id !== todo.id);
+            }
             save();
             render();
         });
         deleteItemButton.addEventListener('click', () => {
-            //add function
+            selectedProject.todos = selectedProject.todos.filter(item => item.id !== todo.id);
+            //delete from important list as well if marked as important
+            if(todo.important) {
+                const importantProject = projects.find(project => project.id == 3);
+                importantProject.todos = importantProject.todos.filter(item => item.id !== todo.id);
+            }
+            save();
+            render();
         });
         
 

@@ -28,6 +28,7 @@ const createTodo = (todoName, todoDate, todoNotes, todoPriority) => {
         notes,
         priority,
         complete,
+        important,
     }
 }
 
