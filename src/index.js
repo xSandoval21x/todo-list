@@ -4,6 +4,7 @@ import {createProject, createTodo} from './factoryFunctions';
 const projectsList = document.querySelector('[data-projects]');
 const addProjectForm = document.querySelector('[data-new-project-form]');
 const addProjectInput = document.querySelector('[data-new-project-input]');
+const addProjectButton = document.querySelector('[data-add-project-button]');
 const deleteListButton = document.querySelector('[data-delete-list-button]');
 const listTitle = document.querySelector('[data-list-title]');
 const listItems = document.querySelector('[data-list-items]');
@@ -54,20 +55,21 @@ projectsList.addEventListener('click', e => {
 });
 addProjectForm.addEventListener('submit', e => {
     e.preventDefault();
-    const projectName = addProjectInput.value;
-    if(projectName == null || projectName === '') return;
-    const project = createProject(projectName);
-    addProjectInput.value = null;
-    projects.push(project);
-    save();
-    render();
+    addProject();
 });
+addProjectButton.addEventListener('click', addProject);
 deleteListButton.addEventListener('click', e => {
+    const selectedProject = projects.find(project => project.id == selectedProjectId);
+    const importantProject = projects.find(project => project.id == 3);
+    //get todos marked important from project being deleted
+    const importantTodos = selectedProject.todos.filter(item => item.important == true);
     projects = projects.filter(project => project.id !== selectedProjectId);
+    //remove important todos from the important project list
+    importantProject.todos = importantProject.todos.filter(item => !importantTodos.includes(item));
     selectedProjectId = 1;
     render();
     save();
-})
+});
 addTodoButton.addEventListener('click', () => {
     formContainer.classList.add('show');
 });
@@ -88,6 +90,10 @@ submitTodoButton.addEventListener('click', () => {
         todoDateInput.value,
         todoNotesInput.value,
         todoPriority);
+    //if todo is being added to the important project list, set important = true
+    if(selectedProject.id == 3) {
+        todoObject.important = true;
+    }
     selectedProject.todos.push(todoObject);
     todoTitleInput.value = null;
     todoDateInput.value = null;
@@ -99,6 +105,16 @@ submitTodoButton.addEventListener('click', () => {
     render();
 });
 closeFormButton.addEventListener('click', hideForm);
+
+function addProject() {
+    const projectName = addProjectInput.value;
+    if(projectName == null || projectName === '') return;
+    const project = createProject(projectName);
+    addProjectInput.value = null;
+    projects.push(project);
+    save();
+    render();
+}
 
 function hideForm() {
     formContainer.classList.remove('show');
@@ -121,13 +137,16 @@ function renderProjects() {
         const projectIcon = document.createElement('ion-icon');
         const projectTitle = document.createElement('span');
         const projectTodoCount = document.createElement('span');
-    
+        const incompleteTodos = project.todos.filter(item => !item.complete);
+
         projectElement.classList.add('nav-item');
         projectElement.dataset.projectId = project.id;
         projectIcon.classList.add('nav-icon');
         projectTitle.classList.add('nav-title');
         projectTitle.innerText = project.name;
         projectTodoCount.classList.add('nav-count');
+        project.todoCount = incompleteTodos.length;
+        projectTodoCount.innerText = project.todoCount > 0? project.todoCount : '';
     
         if(project.id == selectedProjectId) {
             setTimeout( () => {

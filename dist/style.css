@@ -1,8 +1,9 @@
 html, body {
-    min-height: 100vh;
-    width: 100vw;
+    min-height: 100%;
+    width: 100%;
     margin: 0;
     font-family: var(--normal-font);
+    overflow: auto;
 }
 
 :root {
@@ -19,7 +20,7 @@ html, body {
 
 .content {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .projects {
@@ -34,11 +35,10 @@ html, body {
 .left-bar {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100%;
     width: 250px;
     color: white;
     background: var(--blue-theme);
-    overflow: hidden;
     transition: width 500ms;
 }
 
@@ -369,7 +369,8 @@ input[type="radio"] {
 }
 
 input[type="radio"]:checked + label,
-input[type="radio"]:hover + label {
+input[type="radio"]:hover + label,
+input[type="radio"]:focus + label {
     opacity: 1;
 }
 
@@ -478,6 +479,7 @@ input[type="radio"]:hover + label {
         align-items: center;
         margin: 0;
         flex-grow: 1;
+        flex-wrap: wrap;
     }
 
     .nav-item,
