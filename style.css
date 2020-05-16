@@ -382,7 +382,6 @@ input[type='date'],
 #todo-notes {
     height: 80px;
     resize: none;
-    font-size: 0.7rem;
     transition: height 200ms;
 }
 
