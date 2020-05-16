@@ -195,13 +195,19 @@ function renderProjectItems() {
         const listElement = itemElement.querySelector('[data-item]');
         const itemName = itemElement.querySelector('[data-item-name]');
         const itemDate = itemElement.querySelector('[data-item-date]');
+        const itemNotes = itemElement.querySelector('[data-item-notes]');
+        const itemPriority = itemElement.querySelector('[data-item-priority]');
+        const itemDetails = itemElement.querySelector('[data-item-details]');
         const completeItemButton = itemElement.querySelector('[data-complete-item]');
         const importantItemButton = itemElement.querySelector('[data-important-item]');
         const deleteItemButton = itemElement.querySelector('[data-delete-item]');
+        const showDetailsButton = itemElement.querySelector('[data-show-details]');
 
         listElement.dataset.itemId = todo.id;
         itemName.innerText = todo.name;
         itemDate.innerText = todo.date === ''? '' : format(parseISO(todo.date), 'PPP');
+        itemNotes.innerText = `Notes: ${todo.notes}`;
+        itemPriority.innerText = `Priority: ${todo.priority}`;
         switch(todo.priority) {
             case 'Low':
                 listElement.classList.add('priority-low');
@@ -249,6 +255,10 @@ function renderProjectItems() {
             }
             save();
             render();
+        });
+        showDetailsButton.addEventListener('click', () => {
+            itemDetails.classList.toggle('show');
+            showDetailsButton.classList.toggle('rotate');
         });
         
 

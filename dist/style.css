@@ -197,11 +197,33 @@ input:hover::placeholder {
 }
 
 .item {
+    padding: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.quick-view {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.item-more-details {
+    display: flex;
+    height: 0;
+    flex-direction: column;
+    padding-left: 45px;
+    font-size: 0.8rem;
+    transition: height 500ms;
+    overflow: hidden;
+}
+
+.item-more-details.show {
+    height: 45px;
+    overflow: auto;
+}
+
+.item-more-details span {
+    padding: 5px 0;
 }
 
 .item.completed {
@@ -263,6 +285,19 @@ input:hover::placeholder {
 
 .delete-item {
     color: rgb(255, 35, 182);;
+}
+
+.show-details {
+    opacity: 0.5;
+    transition: opacity 500ms, transform 200ms;
+}
+
+.show-details:hover {
+    opacity: 1;
+}
+
+.show-details.rotate {
+    transform: rotate(-180deg);
 }
 
 .list-item-form-container {
