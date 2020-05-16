@@ -28,10 +28,7 @@
             </div>
         </div>
         <div class="main-content">
-            <div class="search-container">
-                <ion-icon name="search-outline" id="search-icon"></ion-icon>
-                <input type="text" id="search-bar">
-            </div>
+            
             <div class="list-head" data-list-head>
                 <h2 class="list-title" data-list-title>General</h2>
                 <div class="list-actions" data-list-actions>
@@ -116,14 +113,21 @@
     </div>
     <template id="item-template">
         <li class="item" data-item>
-            <ion-icon name="ellipse-outline" class="check-box" data-complete-item></ion-icon>
-            <div class="item-details">
-                <span data-item-name></span>
-                <span class="item-date" data-item-date></span>
+            <div class="quick-view">
+                <ion-icon name="ellipse-outline" class="check-box" data-complete-item></ion-icon>
+                <div class="item-details">
+                    <span data-item-name></span>
+                    <span class="item-date" data-item-date></span>
+                </div>
+                <div class="item-actions">
+                    <ion-icon name="star-outline" class="prioritize-item" data-important-item></ion-icon>
+                    <ion-icon name="trash-outline" class="delete-item" data-delete-item></ion-icon>
+                    <ion-icon name="chevron-down-outline" class="show-details" data-show-details></ion-icon>
+                </div>
             </div>
-            <div class="item-actions">
-                <ion-icon name="star-outline" class="prioritize-item" data-important-item></ion-icon>
-                <ion-icon name="trash-outline" class="delete-item" data-delete-item></ion-icon>
+            <div class="item-more-details" data-item-details>
+                <span data-item-notes>Notes: </span>
+                <span data-item-priority>Priority: </span>
             </div>
         </li>
     </template>
