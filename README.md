@@ -19,7 +19,7 @@ A todo list web app using HTML, CSS and Javascript. Part of the Odin Project Cur
 * The javascript relies on updating each project and its todo items, then rendering them on the page whenever a change is made
 * This kept the project much more organized and allowed me to work with multiple projects and adding todos to those projects easier
 * I am beginning to feel much more comfortable using flex box and quicker at realizing any mistake I have made or why something is not looking the way I want it to
-* I used a <template> element which made it very easy to create todo list items by grabbing the elements and simply adding the todo details that are captured through the add todo form
+* I used a template element which made it very easy to create todo list items by grabbing the elements and simply adding the todo details that are captured through the add todo form
 * I kept my project and todo factory functions in their own module which is imported at the beginning of my index.js file
 * Got more experience using localStorage and webpack
 * Installed date-fns dependency and imported the format and parseISO functions to format the date captured by the add todo form
