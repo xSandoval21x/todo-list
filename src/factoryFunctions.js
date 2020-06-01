@@ -1,35 +1,35 @@
 const createProject = (projectName) => {
-    const projectId = Date.now().toString();
-    let name = projectName;
-    let todos = [];
-    let todoCount = 0;
+  const projectId = Date.now().toString();
+  const name = projectName;
+  const todos = [];
+  const todoCount = 0;
 
-    return {
-        id: projectId,
-        name: name,
-        todos: todos,
-        todoCount: todoCount,
-    }
-}
+  return {
+    id: projectId,
+    name,
+    todos,
+    todoCount,
+  };
+};
 
 const createTodo = (todoName, todoDate, todoNotes, todoPriority) => {
-    const id = Date.now().toString();
-    let name = todoName;
-    let date = todoDate;
-    let notes = todoNotes;
-    let priority = todoPriority;
-    let complete = false;
-    let important = false;
+  const id = Date.now().toString();
+  const name = todoName;
+  const date = todoDate;
+  const notes = todoNotes;
+  const priority = todoPriority;
+  const complete = false;
+  const important = false;
 
-    return {
-        id,
-        name,
-        date,
-        notes,
-        priority,
-        complete,
-        important,
-    }
-}
+  return {
+    id,
+    name,
+    date,
+    notes,
+    priority,
+    complete,
+    important,
+  };
+};
 
-export {createProject, createTodo};
+export { createProject, createTodo };
