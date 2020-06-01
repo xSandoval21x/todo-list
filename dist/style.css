@@ -211,7 +211,7 @@ input:hover::placeholder {
   display: flex;
   height: 0;
   flex-direction: column;
-  padding-left: 45px;
+  padding-left: 52px;
   transition: height 500ms;
   overflow: hidden;
 }
